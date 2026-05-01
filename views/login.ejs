@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login / Register – BrightSmile</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/login.css">
+</head>
+
+<body class="auth-page">
+
+  <a href="/" class="back-link">← Back to Home</a>
+
+  <% if (error) { %>
+    <div
+      style="background:#fdecea;color:#c0625a;padding:.75rem 1.4rem;font-size:13.5px;border-bottom:1px solid #f5c6c2;text-align:center;">
+      ⚠️ <%= error %>
+    </div>
+  <% } %>
+
+  <% if (success) { %>
+    <div
+      style="background:#e4f2ea;color:#6aab8e;padding:.75rem 1.4rem;font-size:13.5px;border-bottom:1px solid #c5e3cf;text-align:center;">
+      ✅ <%= success %>
+    </div>
+  <% } %>
+
+  <div class="auth-wrapper">
+
+    <!-- LEFT PANEL -->
+    <div class="auth-left">
+      <div class="auth-brand">
+        <div class="logo-icon-img">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 2C9.5 2 7.5 3.5 6.5 5.5C5.5 4.5 4 4 3 5C1.5 6.5 2 9 3 11C4 13 5 15 5 18C5 20 6 22 8 22C9 22 10 21 10.5 20C11 21 11.5 22 12 22C12.5 22 13 21 13.5 20C14 21 15 22 16 22C18 22 19 20 19 18C19 15 20 13 21 11C22 9 22.5 6.5 21 5C20 4 18.5 4.5 17.5 5.5C16.5 3.5 14.5 2 12 2Z" />
+          </svg>
+        </div>
+        <span class="logo-name">BrightSmile</span>
+      </div>
+      <h2>Your Smile,<br>Our Priority.</h2>
+      <p>Book appointments, track your dental history, and connect with our expert dentist — all in one place.</p>
+      <ul class="auth-perks">
+        <li>📅 Book appointments anytime</li>
+        <li>📋 View your dental records</li>
+        <li>🔔 Receive appointment reminders</li>
+        <li>💬 Leave feedback for your dentist</li>
+      </ul>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="auth-right">
+
+      <div class="tab-buttons">
+        <a class="tab-btn <%= (!active_form || active_form === 'login') ? 'active' : '' %>"
+          href="#login-form">Login</a>
+        <a class="tab-btn <%= (active_form === 'register') ? 'active' : '' %>"
+          href="#register-form">Register</a>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <form id="login-form" class="form-box" action="/login" method="post" <% if(new_temp_password) { %>style="display: none !important;"<% } %>>
+        <h3>Welcome Back</h3>
+        <p class="form-subtitle">Sign in to your patient account.</p>
+
+        <div class="field">
+          <label for="login-username">Username</label>
+          <input type="text" id="login-username" name="username" placeholder="Enter your username">
+        </div>
+
+        <div class="field">
+          <label for="login-password">Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="login-password" name="password" placeholder="Your password">
+            <button type="button" class="eye-toggle">
+              <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <svg class="eye-off-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24">
+                </path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+              </svg>
+            </button>
+          </div>
+          <div class="text-right mt-0-25">
+            <a class="link-btn" href="#forgot-step1">Forgot password?</a>
+          </div>
+        </div>
+
+        <div class="field" style="flex-direction: row; align-items: center; gap: 8px; margin-top: 5px;">
+          <input type="checkbox" id="login-terms" style="width: auto; cursor: pointer;">
+          <label for="login-terms"
+            style="font-size: 12.5px; margin: 0; cursor: pointer; font-weight: 400; display: block; line-height: 1.5;">I
+            have read and agree to the <a href="#" class="open-terms"
+              style="color: var(--primary); text-decoration: underline;">Terms and Conditions and Privacy
+              Policy</a>.</label>
+        </div>
+        <button type="submit" name="login" class="btn-primary full-width mt-10px">Login to My Account</button>
+
+        <p class="form-switch">No account yet?
+          <a class="link-btn" href="#register-form">Register here</a>
+        </p>
+      </form>
+
+      <!-- REGISTER FORM -->
+      <form id="register-form" class="form-box" action="/register" method="post">
+        <h3>Join BrightSmile</h3>
+        <p class="form-subtitle">Create your personal dental portal to manage your appointments.</p>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="reg-fname">First Name</label>
+            <input type="text" id="reg-fname" name="first_name" placeholder="Juan" required>
+          </div>
+          <div class="field">
+            <label for="reg-lname">Last Name</label>
+            <input type="text" id="reg-lname" name="last_name" placeholder="Dela Cruz" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="reg-username">Username</label>
+          <input type="text" id="reg-username" name="username" placeholder="Choose a username">
+        </div>
+
+        <div class="field">
+          <label for="reg-email">Email Address</label>
+          <input type="email" id="reg-email" name="email" placeholder="juan@email.com">
+          <small style="color:var(--muted); font-size:11px; margin-top: 2px;">Used only for password recovery.</small>
+        </div>
+
+        <div class="field">
+          <label for="reg-phone">Phone Number</label>
+          <input type="tel" id="reg-phone" name="phone_number" placeholder="0912 345 6789" pattern="09[0-9]{9}"
+            title="Phone number must start with 09 and be 11 digits long.">
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="reg-gender">Gender</label>
+            <select id="reg-gender" name="gender" required>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="reg-dob">Date of Birth</label>
+            <input type="date" id="reg-dob" name="date_of_birth" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="reg-password">Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="reg-password" name="password" placeholder="Min. 8 characters">
+            <button type="button" class="eye-toggle">
+              <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <svg class="eye-off-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24">
+                </path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="reg-confirm">Confirm Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="reg-confirm" name="confirm_password" placeholder="Repeat password">
+            <button type="button" class="eye-toggle">
+              <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <svg class="eye-off-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24">
+                </path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+
+        <button type="submit" name="register" class="btn-primary full-width mt-10px">Create My Account</button>
+
+        <p class="form-switch">Already have an account?
+          <a class="link-btn" href="#login-form">Login here</a>
+        </p>
+      </form>
+
+      <!-- SIMPLIFIED FORGOT PASSWORD FORM -->
+      <form id="forgot-step1" class="form-box" action="/forgot-password" method="post">
+        <h3>Reset Password</h3>
+        <p class="form-subtitle">Enter your username and registered email to reset your password.</p>
+
+        <div class="field">
+          <label for="forgot-username">Username</label>
+          <input type="text" id="forgot-username" name="username" placeholder="Enter your username" required>
+        </div>
+
+        <div class="field">
+          <label for="forgot-email">Email Address</label>
+          <input type="email" id="forgot-email" name="email" placeholder="juan@email.com" required>
+        </div>
+
+        <button type="submit" name="reset_password" class="btn-primary full-width mt-10px">Reset and Generate
+          Password</button>
+
+        <p class="form-switch">Remembered your password?
+          <a class="link-btn" href="#login-form">Back to Login</a>
+        </p>
+      </form>
+
+      <% if (new_temp_password) { %>
+        <div id="reset-success-display" class="form-box" style="display: flex !important;">
+          <h3>Reset successful!</h3>
+          <p class="reset-success">✅ Your password has been reset to a new random code.</p>
+          <div
+            style="background: var(--primary-lighter); padding: 1rem; border-radius: 8px; text-align: center; margin: 1rem 0; border: 1px dashed var(--primary); position: relative;">
+            <p style="font-size: 12px; color: var(--muted); margin-bottom: 5px;">Your new password is:</p>
+            <input type="text" id="temp-password-input" value="<%= new_temp_password %>" readonly style="font-size: 24px; color: var(--primary); letter-spacing: 2px; text-align: center; background: transparent; border: none; outline: none; width: 100%; margin-bottom: 10px; cursor: text;">
+            <button type="button" onclick="copyPassword()" style="background: var(--primary); color: white; border: none; padding: 6px 16px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 500; transition: background 0.3s; margin-top: 5px;">Copy Password</button>
+            <script>
+                function copyPassword() {
+                    var copyText = document.getElementById("temp-password-input");
+                    copyText.select();
+                    copyText.setSelectionRange(0, 99999); /* For mobile devices */
+                    navigator.clipboard.writeText(copyText.value).then(function() {
+                        var btn = document.querySelector("button[onclick='copyPassword()']");
+                        var originalText = btn.innerText;
+                        btn.innerText = "Copied!";
+                        btn.style.background = "#28a745";
+                        setTimeout(function() {
+                            btn.innerText = originalText;
+                            btn.style.background = "var(--primary)";
+                        }, 2000);
+                    });
+                }
+            </script>
+          </div>
+          <p style="font-size: 12.5px; color: var(--muted); text-align: center;">Please log in using this password and
+            change it in your profile.</p>
+          <button type="button" onclick="window.location.href='/login'" class="btn-primary full-width mt-10px flex-center">Go to Login</button>
+        </div>
+      <% } %>
+
+      <div id="register-success" class="form-box">
+        <h3>Registration successful!</h3>
+        <p class="reset-success">✅ Account created successfully! You can now access your account.</p>
+        <a href="#login-form" class="btn-primary full-width mt-10px flex-center">Go to Login</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TERMS AND POLICY MODAL -->
+  <div id="terms-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+      <button class="modal-close" id="close-modal">&times;</button>
+      <div class="modal-body">
+        <h2>📄 TERMS AND CONDITIONS</h2>
+        <p><strong>Dental Clinic Management System</strong></p>
+
+        <h3>1. Acceptance of Terms</h3>
+        <p>By accessing and using the Dental Clinic System (“System”), you agree to comply with these Terms and
+          Conditions. If you do not agree, you must not use the System.</p>
+
+        <h3>2. Purpose of the System</h3>
+        <p>The System is designed to:</p>
+        <ul>
+          <li>Manage patient records</li>
+          <li>Schedule appointments</li>
+          <li>Store dental history and treatments</li>
+          <li>Facilitate clinic operations</li>
+        </ul>
+
+        <h3>3. User Accounts</h3>
+        <ul>
+          <li>Users must provide accurate and complete information.</li>
+          <li>You are responsible for maintaining the confidentiality of your login credentials.</li>
+          <li>Unauthorized use of accounts must be reported immediately.</li>
+        </ul>
+
+        <h3>4. Patient Responsibilities</h3>
+        <p>Patients agree to:</p>
+        <ul>
+          <li>Provide truthful medical and personal information</li>
+          <li>Attend scheduled appointments or cancel in advance</li>
+          <li>Follow clinic policies and instructions</li>
+        </ul>
+
+        <h3>5. Clinic Responsibilities</h3>
+        <p>The clinic agrees to:</p>
+        <ul>
+          <li>Protect patient data</li>
+          <li>Provide accurate dental records</li>
+          <li>Ensure proper use of the System</li>
+        </ul>
+
+        <h3>6. Appointment Policy</h3>
+        <ul>
+          <li>Appointments must be scheduled through the System.</li>
+          <li>Late arrivals may be rescheduled.</li>
+          <li>Repeated no-shows may result in account restrictions.</li>
+        </ul>
+
+        <h3>7. Data Usage</h3>
+        <ul>
+          <li>All data entered into the System is used for medical and administrative purposes only.</li>
+          <li>Unauthorized access or misuse of data is strictly prohibited.</li>
+        </ul>
+
+        <h3>8. Prohibited Activities</h3>
+        <p>Users must not:</p>
+        <ul>
+          <li>Attempt to hack or disrupt the System</li>
+          <li>Access unauthorized data</li>
+          <li>Upload malicious software</li>
+          <li>Use the System for illegal purposes</li>
+        </ul>
+
+        <h3>9. System Availability</h3>
+        <ul>
+          <li>The System may be temporarily unavailable due to maintenance.</li>
+          <li>The clinic is not liable for interruptions or data loss due to technical issues.</li>
+        </ul>
+
+        <h3>10. Limitation of Liability</h3>
+        <p>The clinic is not responsible for:</p>
+        <ul>
+          <li>Incorrect data entered by users</li>
+          <li>Technical errors beyond control</li>
+          <li>Misuse of the System</li>
+        </ul>
+
+        <h3>11. Termination</h3>
+        <p>The clinic reserves the right to:</p>
+        <ul>
+          <li>Suspend or terminate accounts</li>
+          <li>Remove access for violations of these terms</li>
+        </ul>
+
+        <h3>12. Changes to Terms</h3>
+        <p>These Terms may be updated at any time. Continued use means acceptance of the updated terms.</p>
+
+        <hr style="margin: 24px 0; border: none; border-top: 1px solid var(--border);">
+
+        <h2>🔐 PRIVACY POLICY</h2>
+        <p><strong>Dental Clinic Management System</strong></p>
+        <p><em>Effective Date: [Insert Date]</em></p>
+
+        <h3>1. Information We Collect</h3>
+        <p>We collect the following:</p>
+        <ul>
+          <li>Personal Information (Name, Address, Contact Number)</li>
+          <li>Medical and Dental History</li>
+          <li>Appointment Records</li>
+          <li>Login Credentials</li>
+        </ul>
+
+        <h3>2. How We Use Information</h3>
+        <p>Your information is used to:</p>
+        <ul>
+          <li>Provide dental services</li>
+          <li>Manage appointments</li>
+          <li>Maintain medical records</li>
+          <li>Improve system performance</li>
+        </ul>
+
+        <h3>3. Data Protection</h3>
+        <p>We implement:</p>
+        <ul>
+          <li>Secure databases</li>
+          <li>Encrypted login systems</li>
+          <li>Access control for authorized staff only</li>
+        </ul>
+
+        <h3>4. Sharing of Information</h3>
+        <p>We do NOT sell or share your data except:</p>
+        <ul>
+          <li>When required by law</li>
+          <li>With authorized medical professionals</li>
+          <li>With patient consent</li>
+        </ul>
+
+        <h3>5. Data Retention</h3>
+        <ul>
+          <li>Patient records are stored securely for as long as necessary</li>
+          <li>Data may be archived or deleted based on legal requirements</li>
+        </ul>
+
+        <h3>6. User Rights</h3>
+        <p>You have the right to:</p>
+        <ul>
+          <li>Access your personal data</li>
+          <li>Request corrections</li>
+          <li>Request deletion (if applicable by law)</li>
+        </ul>
+
+        <h3>7. Cookies and Tracking (for Web Systems)</h3>
+        <ul>
+          <li>The System may use cookies for login sessions</li>
+          <li>No tracking for advertising purposes</li>
+        </ul>
+
+        <h3>8. Security Breach</h3>
+        <p>In case of a data breach:</p>
+        <ul>
+          <li>Users will be notified immediately</li>
+          <li>Necessary actions will be taken to secure data</li>
+        </ul>
+
+        <h3>9. Third-Party Services</h3>
+        <ul>
+          <li>The System may integrate with external tools (e.g., database hosting)</li>
+          <li>These services follow their own privacy policies</li>
+        </ul>
+
+        <h3>10. Updates to Privacy Policy</h3>
+        <p>This policy may be updated. Users will be notified of significant changes.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="/login.js"></script>
+</body>
+
+</html>

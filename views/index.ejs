@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrightSmile Dental Care</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="logo">
+        <span
+          style="font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--dark); font-weight: 700;">Bright
+          <span style="color: var(--primary);">Smile</span></span>
+      </a>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#dentists">Dentists</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="/login" class="nav-btn">Login / Register</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero" class="hero-section">
+    <div class="container">
+      <div class="two-col">
+        <div class="hero-text">
+          <h1>Smile Brighter<br>With Expert<br>Dental Care</h1>
+          <p>We provide advanced dental care with a gentle touch. Every visit brings you closer to a healthier, more
+            confident smile.</p>
+          <div class="btn-group">
+            <a href="/login" class="btn-primary">Book an Appointment</a>
+            <a href="#services" class="btn-outline">Our Services</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="/Patient.jpg" alt="Dentist treating a patient" class="hero-img-real">
+        </div>
+      </div>
+    </div>
+    <div class="hero-wave">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+        <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#f5ede0" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="about-section">
+    <div class="container">
+      <div class="two-col reverse">
+        <div class="about-image">
+          <img src="/DentalClinic Interior.jpg" alt="BrightSmile Clinic Interior" class="about-img-real">
+        </div>
+        <div class="about-text">
+          <span class="badge">About Us</span>
+          <h2>Crafting Healthy Smiles With Heart</h2>
+          <p>BrightSmile Dental Care has earned a reputation for providing complete oral health services. Our goal is
+            simple: to offer outstanding dental care in a welcoming, stress-free environment for patients of all ages.
+          </p>
+          <p>Our team of board-certified dentists uses modern technology including digital X-rays, 3D scanning, and
+            laser treatments to provide accurate diagnoses and comfortable care.</p>
+          <a href="/login" class="btn-primary mt-1-5 inline-block">Book a Visit</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="services-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">What We Offer</span>
+        <h2>Our Dental Services</h2>
+        <p>From routine check-ups to full cosmetic makeovers, we cover every part of your dental health.</p>
+      </div>
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-image"><img src="/Cleaning.jpg" alt="Cleaning"></div>
+          <h3>Cleaning</h3>
+          <p>Gentle professional cleaning that keeps your teeth fresh and sparkling.</p>
+        </div>
+        <div class="card">
+          <div class="card-image"><img src="/Tooth extrction.jpg" alt="Tooth Extraction"></div>
+          <h3>Tooth Extraction</h3>
+          <p>Safe and comfortable extraction to relieve pain and protect your oral health.</p>
+        </div>
+        <div class="card">
+          <div class="card-image"><img src="/Root Canal.webp" alt="Root Canal"></div>
+          <h3>Root Canal</h3>
+          <p>Save your natural tooth and eliminate pain with our effective treatment.</p>
+        </div>
+        <div class="card">
+          <div class="card-image"><img src="/Crowns.jpg" alt="Crowns"></div>
+          <h3>Crowns</h3>
+          <p>Restore strength and beauty to your smile with durable custom dental crowns.</p>
+        </div>
+        <div class="card">
+          <div class="card-image"><img src="/Brace.jpg" alt="Braces" style="object-position: center 20%;"></div>
+          <h3>Braces</h3>
+          <p>Straighten your teeth and transform your smile with modern orthodontic braces.</p>
+        </div>
+        <div class="card">
+          <div class="card-image"><img src="/Tooth Srgery.webp" alt="Surgery"></div>
+          <h3>Surgery</h3>
+          <p>Advanced dental surgery performed with precision and care.</p>
+        </div>
+        <div class="card">
+          <div class="card-image"><img src="/Dentures.jpg" alt="Dentures"></div>
+          <h3>Dentures</h3>
+          <p>Regain your confident smile with natural-looking custom dentures.</p>
+        </div>
+        <div class="card">
+          <div class="card-image"><img src="/Whitening.jpg" alt="Whitening"></div>
+          <h3>Whitening</h3>
+          <p>Achieve a noticeably whiter, brighter smile professionally.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DENTISTS -->
+  <section id="dentists" class="dentists-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">Meet Our Dentist</span>
+        <h2>Our Expert Dentist</h2>
+        <p>A compassionate professional dedicated to your oral health and well-being.</p>
+      </div>
+      <div class="dentists-row flex-center">
+        <div class="dentist-card">
+          <div class="dentist-avatar">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" />
+            </svg>
+          </div>
+          <h3>Dr. Je Ligacion-Adelino</h3>
+          <p class="dentist-role">General Dentist</p>
+          <p class="dentist-bio">Dedicated to providing compassionate and high-quality dental care for every patient.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">Get In Touch</span>
+        <h2>Contact Us</h2>
+        <p>We would love to hear from you. Reach out through any of the options below.</p>
+      </div>
+      <div class="contact-row">
+        <div class="contact-box">
+          <div class="contact-icon"><svg viewBox="0 0 24 24">
+              <path
+                d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" />
+            </svg></div>
+          <h3>Address</h3>
+          <p>Gitna Street, Duhat, Bocaue, Philippines, 3018</p>
+        </div>
+        <div class="contact-box">
+          <div class="contact-icon"><svg viewBox="0 0 24 24">
+              <path
+                d="M6.62 10.79C8.06 13.62 10.38 15.94 13.21 17.38L15.41 15.18C15.69 14.9 16.08 14.82 16.43 14.93C17.55 15.3 18.75 15.5 20 15.5C20.55 15.5 21 15.95 21 16.5V20C21 20.55 20.55 21 20 21C10.61 21 3 13.39 3 4C3 3.45 3.45 3 4 3H7.5C8.05 3 8.5 3.45 8.5 4C8.5 5.25 8.7 6.45 9.07 7.57C9.18 7.92 9.1 8.31 8.82 8.59L6.62 10.79Z" />
+            </svg></div>
+          <h3>Phone</h3>
+          <p>0917 167 3833</p>
+        </div>
+        <div class="contact-box">
+          <div class="contact-icon"><svg viewBox="0 0 24 24">
+              <path
+                d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z" />
+            </svg></div>
+          <h3>Email</h3>
+          <p>jazzen08@gmail.com</p>
+        </div>
+        <div class="contact-box">
+          <div class="contact-icon"><svg viewBox="0 0 24 24">
+              <path
+                d="M11.99 2C6.47 2 2 6.48 2 12C2 17.52 6.47 22 11.99 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 11.99 2ZM12 20C7.58 20 4 16.42 4 12C4 7.58 7.58 4 12 4C16.42 4 20 7.58 20 12C20 16.42 16.42 20 12 20ZM12.5 7H11V13L16.25 16.15L17 14.92L12.5 12.25V7Z" />
+            </svg></div>
+          <h3>Clinic Hours</h3>
+          <p>Mon – Sat: 8:00 AM – 5:00 PM</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-logo">
+        <img src="/brightsmile-logo.svg" alt="BrightSmile" class="footer-logo-img">
+        <span>BrightSmile</span>
+      </div>
+      <p>© 2025 BrightSmile Dental Care. All rights reserved.</p>
+      <p class="footer-links"><a href="#">Privacy Policy</a> &middot; <a href="#">Terms</a></p>
+    </div>
+  </footer>
+
+</body>
+
+</html>
