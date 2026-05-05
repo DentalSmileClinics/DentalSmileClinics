@@ -1,5 +1,5 @@
 const db = require('../config/db');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const { logAction } = require('../utils/logger');
 
 const register = async (req, res) => {
@@ -13,7 +13,7 @@ const register = async (req, res) => {
 
     try {
         const [existing] = await db.query("SELECT customer_id FROM customers WHERE username = ? OR email = ?", [username, email]);
-        
+
         if (existing.length > 0) {
             req.session.register_error = 'Username or Email already registered.';
             req.session.active_form = 'register';
@@ -29,7 +29,7 @@ const register = async (req, res) => {
         );
 
         const customerId = result.insertId;
-        
+
         await logAction(customerId, username, "New Customer Registration");
 
         req.session.register_success = 'Account created! Welcome to BrightSmile.';
@@ -97,7 +97,7 @@ const forgotPassword = async (req, res) => {
 
         if (rows.length === 1) {
             const customerId = rows[0].customer_id;
-            
+
             // Generate 8-character random password
             const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
             let newPassword = '';
@@ -108,7 +108,7 @@ const forgotPassword = async (req, res) => {
             const hashedPassword = await bcrypt.hash(newPassword, 10);
 
             await db.query("UPDATE customers SET password = ? WHERE customer_id = ?", [hashedPassword, customerId]);
-            
+
             req.session.new_temp_password = newPassword;
             await logAction(customerId, username, "Password Reset");
         } else {
