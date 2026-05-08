@@ -1,5 +1,5 @@
 const db = require('../config/db');
-const bcrypt = require('bcryptjs');
+const bcryptjs = require('bcryptjs');
 const { logAction } = require('../utils/logger');
 
 const register = async (req, res) => {
@@ -20,7 +20,7 @@ const register = async (req, res) => {
             return res.redirect('/login#register-form');
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcryptjs.hash(password, 10);
         const status = 'active';
 
         const [result] = await db.query(
@@ -44,29 +44,29 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    if (!username || !password) {
+    if (!email || !password) {
         req.session.login_error = 'Credentials required.';
         return res.redirect('/login');
     }
 
     try {
         const [rows] = await db.query(
-            "SELECT customer_id as id, username, password, 'patient' as role, status, first_name, last_name FROM customers WHERE username = ? AND status = 'active'",
-            [username]
+            "SELECT customer_id as id, username, email, password, 'patient' as role, status, first_name, last_name FROM customers WHERE email = ? AND status = 'active'",
+            [email]
         );
 
         if (rows.length === 1) {
             const user = rows[0];
-            const match = await bcrypt.compare(password, user.password);
+            const match = await bcryptjs.compare(password, user.password);
 
             if (match) {
                 req.session.userId = user.id;
                 req.session.userRole = user.role;
                 req.session.user_name = user.first_name + " " + user.last_name;
 
-                await logAction(user.id, user.username, `User Login (${user.role})`);
+                await logAction(user.id, user.email, `User Login (${user.role})`);
 
                 return res.redirect('/dashboard');
             } else {
@@ -84,16 +84,16 @@ const login = async (req, res) => {
 };
 
 const forgotPassword = async (req, res) => {
-    const { username, email } = req.body;
+    const { email } = req.body;
 
-    if (!username || !email) {
-        req.session.login_error = 'Username and Email are required.';
+    if (!email) {
+        req.session.login_error = 'Email address is required.';
         req.session.active_form = 'forgot';
         return res.redirect('/login#forgot-step1');
     }
 
     try {
-        const [rows] = await db.query("SELECT customer_id FROM customers WHERE username = ? AND email = ?", [username, email]);
+        const [rows] = await db.query("SELECT customer_id, email FROM customers WHERE email = ?", [email]);
 
         if (rows.length === 1) {
             const customerId = rows[0].customer_id;
@@ -105,14 +105,14 @@ const forgotPassword = async (req, res) => {
                 newPassword += characters.charAt(Math.floor(Math.random() * characters.length));
             }
 
-            const hashedPassword = await bcrypt.hash(newPassword, 10);
+            const hashedPassword = await bcryptjs.hash(newPassword, 10);
 
             await db.query("UPDATE customers SET password = ? WHERE customer_id = ?", [hashedPassword, customerId]);
 
             req.session.new_temp_password = newPassword;
-            await logAction(customerId, username, "Password Reset");
+            await logAction(customerId, email, "Password Reset");
         } else {
-            req.session.login_error = 'No matching account found with that username and email.';
+            req.session.login_error = 'No account found with that email address.';
         }
     } catch (error) {
         req.session.login_error = 'Failed to reset password. Please try again later.';
